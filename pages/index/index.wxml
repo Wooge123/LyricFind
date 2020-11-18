@@ -1,0 +1,63 @@
+<!--index.wxml-->
+<wxs src="../../tools.wxs" module="m" />
+<view class='page-header'>
+  <view class="search-container">
+    <icon class="search-icon" type='search' size='18' />
+    <view class='center'>
+      <input class="search-input" confirm-type='search' bindconfirm='searchClickEvent' bindinput="searchInputEvent" placeholder="单曲/歌手" value='{{keyword}}' />
+    </view>
+    <text class="search-btn" bindtap="searchClickEvent">搜索</text>
+  </view>
+</view>
+
+<!-- 占位区域 -->
+<view class='placeholder' />
+
+<view style='display: flex;flex-direction: column;'>
+<view class='music' wx:if='{{showPlaying}}'>
+  <image class='playing' src="{{playing? '/images/playing.gif': '/images/noplaying.png'}}" />
+  <text data-id='{{song.id}}' bindtap='songDetail'>{{song.name}} - {{m.handleArtists(song.artists)}}</text>
+  <image class='pp' src="{{playing ? '/images/pause.png' : '/images/play.png'}}" bindtap='ppControl' />
+</view>
+
+<view class='recent-search' wx:if='{{songCount == 0 && searchRecord.length > 0}}'>
+  <view class='recent-h'>
+    <image class='recent-img' src='/images/history.png'></image>
+    <text class='text'>最近搜索</text>
+    <image bindtap='clearHistory' wx:if='{{searchRecord.length > 0}}' class='recent-trash' src='/images/trash.png'></image>
+    <text wx:if='{{searchRecord.length == 0}}'>空</text>
+  </view>
+  <view class='history-items'>
+    <text bindtap='historyClick' data-value='{{item.value}}' wx:for='{{searchRecord}}' wx:if='{{searchRecord.length > 0}}' wx:key='key' class='search-item'>{{item.value}}</text>
+  </view>
+</view>
+
+<view class='mysongs' wx:if='{{songCount == 0}}'>
+  <view class='recent-h'>
+    <image class='recent-img' src='/images/good.png'></image>
+    <text class='text'>示例推荐</text>
+  </view>
+  <view class='history-items'>
+    <text bindtap='toDetail' data-id='{{item.id}}' wx:for='{{mySongs}}' wx:if='{{mySongs.length > 0}}' wx:key='key' class='search-item'>{{item.value}}</text>
+  </view>
+</view>
+</view>
+<!-- list -->
+<view class="common-list" wx:if="{{songCount > 0}}">
+  <import src='/pages/template/item.wxml' />
+  <template is='item' data='{{songs: songs}}' />
+
+  <!-- loading -->
+  <view class="loading">
+    <view class="loading-container">
+      <image class="loading-spinner" src="/images/spinner.gif" wx:if="{{isLoading}}"></image>
+      <text class="loading-text" wx:if="{{isLoading}}">{{loadingText}}</text>
+      <text class="loading-text" wx:elif="{{songs == null || songs.length <= 10 || noMoreData}}">{{noMoreText}}</text>
+      <text class="loading-text" wx:else>{{loadMoreText}}</text>
+    </view>
+  </view>
+</view>
+
+<view bindtap='backTop' class='scroll_top' wx:if='{{showUp}}'>
+  <image src='/images/up.png'></image>
+</view>

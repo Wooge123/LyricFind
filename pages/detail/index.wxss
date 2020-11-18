@@ -1,0 +1,75 @@
+page {
+  background: #f1f1f1;
+  color: #333;
+  font-size: 32rpx;
+  letter-spacing: 0.06em;
+  border-top: 2rpx solid #f1f1f1 
+}
+
+.play {
+  display: inherit;
+  align-items: center;
+}
+
+.play .listen {
+  width: 40rpx;
+  height: 40rpx;
+}
+
+.play .playing {
+  width: 100rpx;
+  height: 36rpx;
+}
+
+.play text {
+  color: #999;
+  font-size: 30rpx;
+}
+
+.proccess {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.proccess text {
+  margin: 20rpx;
+}
+
+.proccess slider {
+  flex: 1;
+  margin: 0 20rpx;
+}
+
+.lyric {
+  background: #fff;
+}
+
+.toolbar {
+  background: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center
+}
+
+.toolbar .title {
+  font-size: 36rpx;
+  font-weight: bold;
+  margin: 20rpx;
+}
+
+.toolbar .switch {
+  margin: 20rpx
+}
+
+.lyric .txt {
+  color: #666;
+  margin: 0 20rpx 30rpx 20rpx;
+  display: block;
+  line-height: 2em
+}
+
+.share {
+  width: 50rpx;
+  height: 50rpx;
+}

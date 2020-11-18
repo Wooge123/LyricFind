@@ -1,0 +1,41 @@
+<wxs src="../../tools.wxs" module="m" />
+<view class='page-header'>
+  <view class='item' bindtap='playSong'>
+    <image class='song-thumbail' src='{{thumbnail==null ? "/images/album_thumbnail.jpeg" : thumbnail}}'></image>
+    <view class='content'>
+      <text class="name">{{name}}</text>
+      <text class='artists'>{{artists}}</text>
+      <view class='play'>
+        <block wx:if='{{playing}}'>
+          <text>正在播放</text>
+          <image class='playing' src='/images/playing.gif' />
+        </block>
+        <block wx:elif='{{pause}}'>
+          <text>已暂停</text>
+          <image class='listen' src='/images/pause.png' />
+        </block>
+        <block wx:else>
+        <view style="display: flex">
+          <text>点击试听</text>
+          <image class='listen' src='/images/listen.png' /></view>
+        </block>
+      </view>
+    </view>
+    <view>
+    </view>
+  </view>
+  <view class='proccess' wx:if='{{playing || pause}}'>
+    <text class='curTime'>{{m.formatTime(value)}}</text>
+    <slider block-size='20' bindchanging='bindChanging' bindchange="bindChange" activeColor='#7bd500' max='{{duration}}' step="1000" value='{{value}}' />
+    <text class='totalTime'>{{m.formatTime(duration)}}</text>
+  </view>
+  <view style='width:100%;height:30rpx' wx:else></view>
+  <view class='toolbar'>
+  <text class='title'>歌词内容</text>
+  <switch checked='{{checked}}' class='switch' color='#7bd500' bindchange="switch2Change" />
+</view>
+</view>
+
+<scroll-view bindlongtap='copyLyric' enable-back-to-top="true" scroll-y="true" style="height:{{scrollHeight}}px" class='lyric'>
+  <text class='txt'>{{curLyric}}</text>
+</scroll-view>

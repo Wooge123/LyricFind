@@ -1,0 +1,24 @@
+<template name="item">
+  <wxs src="../../tools.wxs" module="m" />
+  <block wx:for="{{songs}}" wx:for-index='index' wx:key='key'>
+    <view bindtap='songDetail' data-id='{{item.id}}' class="list-item">
+      <view class='content'>
+        <view class='row1'>
+          <text class="title">{{item.name}}</text>
+        </view>
+        <view class='row2'>
+          <text class='singer'>{{m.handleArtists(item.artists)}}
+          </text>
+          <text class="time ">{{m.formatTime(item.duration)}}</text>
+        </view>
+      </view>
+    </view>
+  </block>
+</template>
+
+<template name='cell'>
+  <view bindtap="{{bindtap}}" class="cell-item {{color}}" hover-class='selected'>
+    <text>{{title}}</text>
+    <image src='/images/arrow_dark.png' style='display: {{display}}'></image>
+  </view>
+</template>

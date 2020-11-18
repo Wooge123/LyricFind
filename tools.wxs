@@ -1,0 +1,23 @@
+// 去除 html 标签
+var handleArtists = function(artists) {
+  var singers = ''
+  for (var i = 0; i < artists.length; i++) {
+    singers += artists[i].name + '/'
+  }
+  return singers.charAt(singers.length - 1) == '/' ? singers.substring(0, singers.length - 1) : singers
+}
+
+// 毫秒转分钟
+var formatTime = function(time) {
+  var t = time / 1000 / 60;
+  var m = Math.floor(t)
+  var d = Math.floor((t - m) * 60)
+  m = m < 10 ? '0' + m : m
+  d = d < 10 ? '0' + d : d
+  return m + ':' + d
+}
+
+module.exports = {
+  handleArtists: handleArtists,
+  formatTime: formatTime
+}
